@@ -2,27 +2,24 @@ require('dotenv').load()
 const logger = require('log4js').getLogger()
 const Request = require('./utils/request')
 
-function createMessage(list) {
+function createMessage(chatworkUsers) {
   const message = `
   [info][title]Hello[/title]
-  [To:2524834] Nguyen Van Thang
-
-  [title]List user detected:[/title]
-  ${list.toString(', ')}
+  ${chatworkUsers.map(user => `[To:${user.aid}] ${user.name}`)}
   [/info]
   `
   return message
 }
 
 
-function sendMessageToChatwork(list) {
+function sendMessageToChatwork(chatworkUsers) {
   Request
     .post({
-      url: `https://api.chatwork.com/v2/rooms/${process.env.THANG_ID}/messages`,
+      url: `https://api.chatwork.com/v2/rooms/${process.env.CHATWORK_ROOM_ID}/messages`,
       headers: {
         'X-ChatWorkToken': process.env.CHATWORK_TOKEN,
       },
-      params: { body: createMessage(list) }
+      params: { body: createMessage(chatworkUsers) }
     })
     .then(() => {
       logger.debug('Send messsage successfully')

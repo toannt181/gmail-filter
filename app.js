@@ -1,17 +1,22 @@
 const logger = require('log4js').getLogger()
 logger.level = 'debug'
 const find = require('lodash/find')
+const inputCmd = require('./utils/inputCmd')
 const { google } = require('googleapis')
 const { queryBox } = require('./utils/date')
 const { sendMessageToChatwork } = require('./chatwork')
+const chatworkAccounts = require('./accounts')
 
 async function app(auth) {
   const gmail = google.gmail({ version: 'v1', auth })
   const list = await getListMessages(gmail)
   const array = list.map(async item => getMessage(gmail, item))
   const users = await Promise.all(array)
-  sendMessageToChatwork(users)
-  logger.debug(users)
+  logger.debug('Would you like to send message to chatwork? (y/n)')
+  const type = await inputCmd()
+  if (type.toUpperCase() !== 'Y') return
+  const chatworkUsers = mapChatworkId(users)
+  const result = sendMessageToChatwork(chatworkUsers)
 }
 
 function getListMessages(gmail) {
@@ -63,6 +68,14 @@ function getMessage(gmail, item) {
 
 function formatName(subject) {
   return /.+\s+(\S+)$/.exec(subject)[1]
+}
+
+function mapChatworkId(users) {
+  const chatworkUser = users.map(user => {
+    const username = user.replace(/\./g, ' ')
+    return find(chatworkAccounts, account => account.name.toUpperCase() === username.toUpperCase())
+  })
+  return chatworkUser
 }
 
 module.exports = app
