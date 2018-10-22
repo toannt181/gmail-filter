@@ -3,30 +3,34 @@ logger.level = 'debug'
 const find = require('lodash/find')
 const inputCmd = require('./utils/inputCmd')
 const { google } = require('googleapis')
-const { queryBox } = require('./utils/date')
+const { queryBox, getReportDate } = require('./utils/date')
 const { sendMessageToChatwork } = require('./chatwork')
 const chatworkAccounts = require('./accounts')
+const createMessage = require('./createMessage')
 
 async function app(auth) {
   const gmail = google.gmail({ version: 'v1', auth })
-  const list = await getListMessages(gmail)
+  const reportDate = getReportDate()
+  logger.debug('Get report on:', reportDate.format('DD MMM YYYY'))
+  const list = await getListMessages(gmail, reportDate)
   const array = list.map(async item => getMessage(gmail, item))
   const users = await Promise.all(array)
   logger.debug('Would you like to send message to chatwork? (y/n)')
-  const type = await inputCmd()
-  if (type.toUpperCase() !== 'Y') return
+  // const type = await inputCmd()
+  // if (type.toUpperCase() !== 'Y') return
   const chatworkUsers = mapChatworkId(users)
-  const result = sendMessageToChatwork(chatworkUsers)
+  const reportGroup = createMessage(chatworkUsers, reportDate)
+  logger.debug(reportGroup)
+  const result = sendMessageToChatwork(reportGroup, reportDate)
 }
 
-function getListMessages(gmail) {
+function getListMessages(gmail, date) {
   return new Promise((resolve, reject) => {
     const day = 1
-    logger.debug('Get message from pattern', queryBox())
     gmail.users.messages.list(
       {
         userId: 'me',
-        q: queryBox(),
+        q: queryBox(date),
         maxResults: 999,
       },
       (err, res) => {
@@ -58,9 +62,9 @@ function getMessage(gmail, item) {
           reject(err)
           return
         }
-        const subject = find(res.data.payload.headers, { name: 'Subject' })
-        logger.debug('Got from ', formatName(subject.value))
-        resolve(formatName(subject.value))
+        const subject = find(res.data.payload.headers, { name: 'Subject' }).value
+        const date = find(res.data.payload.headers, { name: 'Date' }).value
+        resolve({ name: formatName(subject), date })
       }
     )
   })
@@ -72,8 +76,9 @@ function formatName(subject) {
 
 function mapChatworkId(users) {
   const chatworkUser = users.map(user => {
-    const username = user.replace(/\./g, ' ')
-    return find(chatworkAccounts, account => account.name.toUpperCase() === username.toUpperCase())
+    const username = user.name.replace(/\./g, ' ')
+    const chatwork = find(chatworkAccounts, account => account.name.toUpperCase() === username.toUpperCase())
+    return { ...user, chatwork }
   })
   return chatworkUser
 }
