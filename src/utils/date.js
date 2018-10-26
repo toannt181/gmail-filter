@@ -1,6 +1,5 @@
 const moment = require('moment')
 moment.locale('en')
-const logger = require('log4js').getLogger()
 
 function getDate() {
   const now = moment()
@@ -10,7 +9,7 @@ function getDate() {
 }
 
 function getReportDate() {
-  const now = moment().hour(8).minute(0)
+  const now = moment().hour(0).minute(0).second(0)
   let subtractDay = 1
   if (now.weekday() === 0) {
     subtractDay = 2
@@ -21,12 +20,11 @@ function getReportDate() {
   return now.subtract(subtractDay, 'day')
 }
 
-function queryBox(date) {
-  const time = date.format('DD MMM YYYY')
-  const sub = `[FE][Daily Report]`
-  return `subject:${sub} ${time} To:frontend@framgia.com`
+function isLate(date, reportDate) {
+  return moment(date).diff(moment(reportDate).add(1, 'days').hour(0).minute(0).second(0), 'secound') > 0
 }
 
+
 module.exports.getDate = getDate
-module.exports.queryBox = queryBox
 module.exports.getReportDate = getReportDate
+module.exports.isLate = isLate

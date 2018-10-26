@@ -24,30 +24,6 @@ async function app(auth) {
   const result = sendMessageToChatwork(reportGroup, reportDate)
 }
 
-function getListMessages(gmail, date) {
-  return new Promise((resolve, reject) => {
-    const day = 1
-    gmail.users.messages.list(
-      {
-        userId: 'me',
-        q: queryBox(date),
-        maxResults: 999,
-      },
-      (err, res) => {
-        if (err) {
-          logger.debug('The API returned an error: ', err)
-          reject(err)
-          return
-        }
-        const length = res.data.resultSizeEstimate
-        logger.debug({ length })
-        logger.debug('Finding %s messages in %s day', res.data.messages.length, day)
-        resolve(res.data.messages)
-      }
-    )
-  })
-}
-
 function getMessage(gmail, item) {
   return new Promise((resolve, reject) => {
     gmail.users.messages.get(
@@ -70,9 +46,6 @@ function getMessage(gmail, item) {
   })
 }
 
-function formatName(subject) {
-  return /.+\s+(\S+)$/.exec(subject)[1]
-}
 
 function mapChatworkId(users) {
   const chatworkUser = users.map(user => {

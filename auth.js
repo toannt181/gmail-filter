@@ -6,14 +6,19 @@ const { google } = require('googleapis')
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 const TOKEN_PATH = 'token.json'
 
-const app = require('./app')
-
-// Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err)
-  // Authorize a client with credentials, then call the Gmail API.
-  authorize(JSON.parse(content), app)
-})
+function getAuth() {
+  return new Promise((resolve, reject) => {
+    // Load client secrets from a local file.
+    fs.readFile('credentials.json', (err, content) => {
+      if (err) {
+        console.log('Error loading client secret file:', err)
+        reject(err)
+      }
+      // Authorize a client with credentials, then call the Gmail API.
+      authorize(JSON.parse(content), resolve)
+    })
+  })
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -93,3 +98,5 @@ function listLabels(auth) {
     }
   )
 }
+
+module.exports = getAuth 
