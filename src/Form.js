@@ -14,7 +14,7 @@ class Form extends React.PureComponent {
     axios
       .post('getMails', { date: this.state.selectedDay })
       .then(res => {
-        this.setState({ mails: res.data })
+        this.setState({ mails: res.data }, this.createChatworkMessage)
       })
       .catch(() => {
         this.setState({ mails: [], message: '' })
@@ -26,8 +26,7 @@ class Form extends React.PureComponent {
   }
 
   sendToChatWork = () => {
-    axios.post('sendChatwork', { message: this.state.message }).then(res => {
-    })
+    axios.post('sendChatwork', { message: this.state.message })
   }
 
   renderStatus = (mail) => {
@@ -59,7 +58,7 @@ class Form extends React.PureComponent {
               <td>{mail.name}</td>
               <td>{mail.subject}</td>
               <td>
-                {moment(mail.date).format('DD/MM/YYYY HH:mm')} &nbsp;&nbsp;
+                {mail.date ? moment(mail.date).format('DD/MM/YYYY HH:mm') : 'N/A'} &nbsp;&nbsp;
                 {this.renderStatus(mail)}
               </td>
             </tr>
@@ -70,6 +69,7 @@ class Form extends React.PureComponent {
   }
 
   createChatworkMessage = () => {
+    if (!this.state.mails) return
     this.setState({ message: createMessage(this.state.mails, this.state.selectedDay) })
   }
 
@@ -84,21 +84,21 @@ class Form extends React.PureComponent {
       <div className="container">
         <h1 className="title">Report Tool</h1>
         <div className="date-picker">
-          <span className="title-2">Selected day to check:</span>
+          <span className="title-2">Select day to check:</span>
           <DayPickerInput
             onDayChange={this.handleDayChange}
             value={this.formatDay()}
-            placeholder="Selected day" />
+            placeholder="Date" />
         </div>
         <div className="buttons">
           <button className="button is-primary" onClick={this.fetchData}>Get message</button>
         </div>
         {this.renderTable(mails)}
-        {mails.length > 0 && (
+        {/* {mails.length > 0 && (
           <div>
             <button className="button is-primary" onClick={this.createChatworkMessage}>Create chatwork message</button>
           </div>
-        )}
+        )} */}
         <br />
         {message && (
           <div>
