@@ -5,6 +5,7 @@ const router = express.Router()
 const log = require('debug')('app:api')
 const { getMessage, getMessageDetail } = require('./gmailApi')
 const accounts = require('../accounts.json')
+const frontenders = require('../frontender.json')
 const find = require('lodash/find')
 const { sendMessageToChatwork } = require('../chatwork')
 
@@ -18,13 +19,17 @@ router.post('/getMails', async (req, res) => {
     }
     const array = list.map(async item => getMessageDetail(gmail, item))
     const headerUsers = await Promise.all(array)
-    const users = headerUsers.map(user => {
-      const { Date: date, From: from, Subject: subject } = user
-      const convertedName = /<(.+)@.+>/.exec(from)[1].replace(/\.+/ig, '')
+    const users = frontenders.map(frontender => {
+      const name = frontender.name.replace(/\s+/ig, '').toUpperCase()
       const account = find(accounts, item => {
-        return item.name.replace(/\s+/ig, '').toUpperCase() === convertedName.toUpperCase()
+        return item.name.replace(/\s+/ig, '').toUpperCase() === name
+      }) || { aid: 'missing ' + frontender.name }
+      const mail = find(headerUsers, item => {
+        const convertedName = /<(.+)@.+>/.exec(item.From)[1].replace(/\.+/ig, '').toUpperCase()
+        return convertedName === name
       })
-      return { date, from, subject, account }
+      const { Date: date, From: from, Subject: subject } = mail || {}
+      return { date, from, subject, account, name: frontender.name }
     })
     res.send(users)
   } catch (e) {

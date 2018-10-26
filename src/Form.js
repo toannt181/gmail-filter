@@ -30,6 +30,17 @@ class Form extends React.PureComponent {
     })
   }
 
+  renderStatus = (mail) => {
+    if (!mail.date) {
+      return <span className="tag is-warning">Miss</span>
+    }
+    if (isLate(mail.date, this.state.selectedDay)) {
+      return <span className="tag is-danger">Late</span>
+    } else {
+      return <span className="tag is-success">On time</span>
+    }
+  }
+
   renderTable(mails) {
     return (
       <table className="table mail-table is-fullwidth">
@@ -45,13 +56,11 @@ class Form extends React.PureComponent {
           {mails.map((mail, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{mail.from}</td>
+              <td>{mail.name}</td>
               <td>{mail.subject}</td>
               <td>
                 {moment(mail.date).format('DD/MM/YYYY HH:mm')} &nbsp;&nbsp;
-                {isLate(mail.date, this.state.selectedDay)
-                  ? <span className="tag is-danger">Late</span>
-                  : <span className="tag is-success">On time</span>}
+                {this.renderStatus(mail)}
               </td>
             </tr>
           ))}
