@@ -7,8 +7,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "server": "DEBUG=app:* nodemon ./server.js",
+    "test": "npm run build && npm run server",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
