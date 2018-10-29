@@ -4,7 +4,6 @@ const express = require('express')
 const router = express.Router()
 const log = require('debug')('app:api')
 const { getMessage, getMessageDetail } = require('./gmailApi')
-const accounts = require('../accounts.json').result.account_dat
 const frontenders = require('../frontender.json')
 const find = require('lodash/find')
 const { sendMessageToChatwork } = require('../chatwork')
@@ -20,16 +19,13 @@ router.post('/getMails', async (req, res) => {
     const array = list.map(async item => getMessageDetail(gmail, item))
     const headerUsers = await Promise.all(array)
     const users = frontenders.map(frontender => {
-      const name = frontender.name.replace(/\s+/ig, '').toUpperCase()
-      const account = find(accounts, item => {
-        return item.name.replace(/\s+/ig, '').toUpperCase() === name
-      }) || { aid: 'missing ' + frontender.name }
+      const name = frontender.label.replace(/\s+/ig, '').toUpperCase()
       const mail = find(headerUsers, item => {
         const convertedName = /<(.+)@.+>/.exec(item.From)[1].replace(/\.+/ig, '').toUpperCase()
         return convertedName === name
       })
       const { Date: date, From: from, Subject: subject } = mail || {}
-      return { date, from, subject, account, name: frontender.name }
+      return { date, from, subject, account: frontender, name: frontender.label }
     })
     res.send(users)
   } catch (e) {
@@ -43,6 +39,15 @@ router.post('/sendChatwork', async (req, res) => {
     const message = req.body.message
     await sendMessageToChatwork(message)
     res.send({ message: 'OK' })
+  } catch (e) {
+    log(e)
+    res.status(500).end()
+  }
+})
+
+router.get('/chatworkList', async (req, res) => {
+  try {
+    res.send(frontenders)
   } catch (e) {
     log(e)
     res.status(500).end()

@@ -2,6 +2,7 @@
   "restartable": "rs",
   "ignore": [
     ".git",
+    "src",
     "node_modules/**/node_modules"
   ],
   "verbose": false,

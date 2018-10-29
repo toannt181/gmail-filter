@@ -1,1 +1,242 @@
-[{"mail":"le.van.giangb@framgia.com","name":"Le Van Giangb"},{"mail":"nguyen.quoc.anh@framgia.com","name":"Nguyen Quoc Anh"},{"mail":"le.quang.son@framgia.com","name":"Le Quang Son"},{"mail":"nguyen.duy.khanhc@framgia.com","name":"Nguyen Duy Khanhc"},{"mail":"nguyen.minh.nhatb@framgia.com","name":"Nguyen Minh Nhatb"},{"mail":"banh.huu.nguyen@framgia.com","name":"Banh Huu Nguyen"},{"mail":"pham.sy.tung@framgia.com","name":"Pham Sy Tung"},{"mail":"dinh.tien.thang@framgia.com","name":"Dinh Tien Thang"},{"mail":"le.nam@framgia.com","name":"Le Nam"},{"mail":"le.duc.tho@framgia.com","name":"Le Duc Tho"},{"mail":"trinh.van.thang@framgia.com","name":"Trinh Van Thang"},{"mail":"tran.cong.hanh@framgia.com","name":"Tran Cong Hanh"},{"mail":"nguyen.kieu.ngan@framgia.com","name":"Nguyen Kieu Ngan"},{"mail":"nguyen.trong.duy@framgia.com","name":"Nguyen Trong Duy"},{"mail":"ho.van.cuong@framgia.com","name":"Ho Van Cuong"},{"mail":"do.thanh.long@framgia.com","name":"Do Thanh Long"},{"mail":"nguyen.van.thang@framgia.com","name":"Nguyen Van Thang"},{"mail":"tran.quoc.y@framgia.com","name":"Tran Quoc Y"},{"mail":"nguyen.nhu.hai.trieu@framgia.com","name":"Nguyen Nhu Hai Trieu"},{"mail":"tran.thi.bich.hanh@framgia.com","name":"Tran Thi Bich Hanh"},{"mail":"dinh.hiep.sy@framgia.com","name":"Dinh Hiep Sy"},{"mail":"ha.huu.tin@framgia.com","name":"Ha Huu Tin"},{"mail":"nguyen.thi.mai.huong@framgia.com","name":"Nguyen Thi Mai Huong"},{"mail":"pham.minh.huong@framgia.com","name":"Pham Minh Huong"},{"mail":"bui.duc.cuong@framgia.com","name":"Bui Duc Cuong"},{"mail":"bui.gia.thinh@framgia.com","name":"Bui Gia Thinh"},{"mail":"lai.hoang.phuc@framgia.com","name":"Lai Hoang Phuc"},{"mail":"nguyen.manh.tung@framgia.com","name":"Nguyen Manh Tung"},{"mail":"pham.thi.ngoc.mai@framgia.com","name":"Pham Thi Ngoc Mai"},{"mail":"luu.quang.minh@framgia.com","name":"Luu Quang Minh"},{"mail":"nguyen.huy.cuong@framgia.com","name":"Nguyen Huy Cuong"},{"mail":"nguyen.thanh.tuanb@framgia.com","name":"Nguyen Thanh Tuanb"},{"mail":"nguyen.trong.toan@framgia.com","name":"Nguyen Trong Toan"},{"mail":"luu.van.chinh@framgia.com","name":"Luu Van Chinh"},{"mail":"dinh.long.hai@framgia.com","name":"Dinh Long Hai"},{"mail":"do.viet.tung@framgia.com","name":"Do Viet Tung"},{"mail":"nguyen.van.hoat@framgia.com","name":"Nguyen Van Hoat"},{"mail":"le.duc.tho@framgia.com","name":"Le Duc Tho"},{"mail":"nguyen.tuan.anhc@framgia.com","name":"Nguyen Tuan Anhc"},{"mail":"nguyen.huu.khuyen@framgia.com","name":"Nguyen Huu Khuyen"},{"mail":"hoang.tuan.anh@framgia.com","name":"Hoang Tuan Anh"},{"mail":"nguyen.phuong.thuan@framgia.com","name":"Nguyen Phuong Thuan"},{"mail":"yuji.matsumoto@framgia.com","name":"Yuji Matsumoto"},{"mail":"nguyen.ba.hung@framgia.com","name":"Nguyen Ba Hung"}]
+[
+  {
+    "id": 0,
+    "label": "Le Van Giangb",
+    "value": "le.van.giangb@framgia.com",
+    "aid": "2981520"
+  },
+  {
+    "id": 1,
+    "label": "Nguyen Quoc Anh",
+    "value": "nguyen.quoc.anh@framgia.com",
+    "aid": "2981640"
+  },
+  {
+    "id": 2,
+    "label": "Le Quang Son",
+    "value": "le.quang.son@framgia.com",
+    "aid": "3020632"
+  },
+  {
+    "id": 3,
+    "label": "Nguyen Duy Khanhc",
+    "value": "nguyen.duy.khanhc@framgia.com",
+    "aid": "3038954"
+  },
+  {
+    "id": 4,
+    "label": "Nguyen Minh Nhatb",
+    "value": "nguyen.minh.nhatb@framgia.com",
+    "aid": "3064591"
+  },
+  {
+    "id": 5,
+    "label": "Banh Huu Nguyen",
+    "value": "banh.huu.nguyen@framgia.com",
+    "aid": "3127880"
+  },
+  {
+    "id": 6,
+    "label": "Pham Sy Tung",
+    "value": "pham.sy.tung@framgia.com",
+    "aid": "3175878"
+  },
+  {
+    "id": 7,
+    "label": "Dinh Tien Thang",
+    "value": "dinh.tien.thang@framgia.com",
+    "aid": "2826422"
+  },
+  {
+    "id": 8,
+    "label": "Le Nam",
+    "value": "le.nam@framgia.com",
+    "aid": "3205664"
+  },
+  {
+    "id": 9,
+    "label": "Le Duc Tho",
+    "value": "le.duc.tho@framgia.com",
+    "aid": "3075419"
+  },
+  {
+    "id": 10,
+    "label": "Trinh Van Thang",
+    "value": "trinh.van.thang@framgia.com",
+    "aid": "3223232"
+  },
+  {
+    "id": 11,
+    "label": "Tran Cong Hanh",
+    "value": "tran.cong.hanh@framgia.com",
+    "aid": "3260352"
+  },
+  {
+    "id": 12,
+    "label": "Nguyen Kieu Ngan",
+    "value": "nguyen.kieu.ngan@framgia.com",
+    "aid": "3260309"
+  },
+  {
+    "id": 13,
+    "label": "Nguyen Trong Duy",
+    "value": "nguyen.trong.duy@framgia.com",
+    "aid": "3193149"
+  },
+  {
+    "id": 14,
+    "label": "Ho Van Cuong",
+    "value": "ho.van.cuong@framgia.com",
+    "aid": "2047133"
+  },
+  {
+    "id": 15,
+    "label": "Do Thanh Long",
+    "value": "do.thanh.long@framgia.com",
+    "aid": "2135889"
+  },
+  {
+    "id": 16,
+    "label": "Tran Quoc Y",
+    "value": "tran.quoc.y@framgia.com",
+    "aid": "2047092"
+  },
+  {
+    "id": 17,
+    "label": "Nguyen Nhu Hai Trieu",
+    "value": "nguyen.nhu.hai.trieu@framgia.com",
+    "aid": "2155634"
+  },
+  {
+    "id": 18,
+    "label": "Tran Thi Bich Hanh",
+    "value": "tran.thi.bich.hanh@framgia.com",
+    "aid": "2846930"
+  },
+  {
+    "id": 19,
+    "label": "Dinh Hiep Sy",
+    "value": "dinh.hiep.sy@framgia.com",
+    "aid": "2310065"
+  },
+  {
+    "id": 20,
+    "label": "Nguyen Thi Mai Huong",
+    "value": "nguyen.thi.mai.huong@framgia.com",
+    "aid": "2273901"
+  },
+  {
+    "id": 21,
+    "label": "Bui Duc Cuong",
+    "value": "bui.duc.cuong@framgia.com",
+    "aid": "2155877"
+  },
+  {
+    "id": 22,
+    "label": "Bui Gia Thinh",
+    "value": "bui.gia.thinh@framgia.com",
+    "aid": "2533820"
+  },
+  {
+    "id": 23,
+    "label": "Lai Hoang Phuc",
+    "value": "lai.hoang.phuc@framgia.com",
+    "aid": "2660327"
+  },
+  {
+    "id": 24,
+    "label": "Pham Thi Ngoc Mai",
+    "value": "pham.thi.ngoc.mai@framgia.com",
+    "aid": "2025350"
+  },
+  {
+    "id": 25,
+    "label": "Luu Quang Minh",
+    "value": "luu.quang.minh@framgia.com",
+    "aid": "2343512"
+  },
+  {
+    "id": 26,
+    "label": "Nguyen Huy Cuong",
+    "value": "nguyen.huy.cuong@framgia.com",
+    "aid": "2750160"
+  },
+  {
+    "id": 27,
+    "label": "Nguyen Thanh Tuanb",
+    "value": "nguyen.thanh.tuanb@framgia.com",
+    "aid": "2155772"
+  },
+  {
+    "id": 28,
+    "label": "Nguyen Trong Toan",
+    "value": "nguyen.trong.toan@framgia.com",
+    "aid": "2801989"
+  },
+  {
+    "id": 29,
+    "label": "Luu Van Chinh",
+    "value": "luu.van.chinh@framgia.com",
+    "aid": "1818670"
+  },
+  {
+    "id": 30,
+    "label": "Dinh Long Hai",
+    "value": "dinh.long.hai@framgia.com",
+    "aid": "2750272"
+  },
+  {
+    "id": 31,
+    "label": "Do Viet Tung",
+    "value": "do.viet.tung@framgia.com",
+    "aid": "2274061"
+  },
+  {
+    "id": 32,
+    "label": "Nguyen Van Hoat",
+    "value": "nguyen.van.hoat@framgia.com",
+    "aid": "2085754"
+  },
+  {
+    "id": 33,
+    "label": "Le Duc Tho",
+    "value": "le.duc.tho@framgia.com",
+    "aid": "3075419"
+  },
+  {
+    "id": 34,
+    "label": "Nguyen Tuan Anhc",
+    "value": "nguyen.tuan.anhc@framgia.com",
+    "aid": "2779471"
+  },
+  {
+    "id": 35,
+    "label": "Nguyen Huu Khuyen",
+    "value": "nguyen.huu.khuyen@framgia.com",
+    "aid": "3340740"
+  },
+  {
+    "id": 36,
+    "label": "Hoang Tuan Anh",
+    "value": "hoang.tuan.anh@framgia.com",
+    "aid": "3153487"
+  },
+  {
+    "id": 37,
+    "label": "Nguyen Phuong Thuan",
+    "value": "nguyen.phuong.thuan@framgia.com",
+    "aid": "3127954"
+  },
+  {
+    "id": 38,
+    "label": "Yuji Matsumoto",
+    "value": "yuji.matsumoto@framgia.com",
+    "aid": "3096974"
+  },
+  {
+    "id": 39,
+    "label": "Nguyen Ba Hung",
+    "value": "nguyen.ba.hung@framgia.com",
+    "aid": "3419054"
+  }
+]
