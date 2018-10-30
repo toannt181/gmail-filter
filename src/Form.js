@@ -8,6 +8,8 @@ import createMessage from './utils/createMessage'
 import { isLate, getReportDate } from './utils/date'
 import Members from './Members'
 
+const copyImage = 'https://upload.wikimedia.org/wikipedia/commons/0/04/Copy_font_awesome.svg'
+
 class Form extends React.PureComponent {
   state = {
     mails: [],
@@ -17,6 +19,7 @@ class Form extends React.PureComponent {
     selectedOption: [],
     error: '',
     isSendMessage: false,
+    isCopy: false,
   }
 
   componentDidMount() {
@@ -33,7 +36,7 @@ class Form extends React.PureComponent {
 
   fetchData = () => {
     axios
-      .post('getMails', { date: this.state.selectedDay })
+      .post('getMails', { date: this.state.selectedDay.format() })
       .then(res => {
         this.setState({ mails: res.data }, this.createChatworkMessage)
         this.resetError()
@@ -41,6 +44,7 @@ class Form extends React.PureComponent {
       .catch(() => {
         this.setState({ mails: [], message: '', error: 'Message is not found' })
       })
+    this.setState({ isCopy: false })
   }
 
   formatDay = () => {
@@ -111,7 +115,7 @@ class Form extends React.PureComponent {
   }
 
   handleDayChange = (date) => {
-    this.setState({ selectedDay: moment(date) })
+    this.setState({ selectedDay: moment(date), mails: [], message: '' })
   }
 
   handleChange = (selectedOption) => {
@@ -123,12 +127,24 @@ class Form extends React.PureComponent {
       return i !== index ? option : { ...option, aid: value }
     })
     this.setState({ options })
-    console.log(JSON.stringify(options))
+  }
+
+  copy= () => {
+    if (document.selection) {
+      var range = document.body.createTextRange()
+      range.moveToElementText(document.getElementById('chatwork-msg'))
+      range.select().createTextRange()
+    } else if (window.getSelection) {
+      var range = document.createRange()
+      range.selectNode(document.getElementById('chatwork-msg'))
+      window.getSelection().addRange(range)
+    }
+    document.execCommand('copy')
+    this.setState({ isCopy: true })
   }
 
   render() {
-    const { mails, message, selectedOption, options, error, isSendMessage } = this.state
-console.log(isSendMessage)
+    const { mails, message, selectedOption, options, error, isSendMessage, isCopy } = this.state
     return (
       <div className="container">
         {/* <Members members={options} changeAid={this.changeAid} /> */}
@@ -169,8 +185,14 @@ console.log(isSendMessage)
         {
           message && (
             <div>
-              <div className="title is-4">Message</div>
-              <pre>{message}</pre>
+              <div className="title is-4">
+                Message
+                <button className="button is-primary" onClick={this.copy}>
+                  {isCopy ? 'Copied!' : 'Copy'}
+                  <img class="img-copy" src={copyImage} alt="copy" width="18" />
+                </button>
+              </div>
+              <pre id="chatwork-msg">{message}</pre>
               <br />
               <div className=""><button className={`button ${isSendMessage ? 'is-success' : 'is-default'}`} onClick={this.sendToChatWork}>Send to chatwork</button></div>
             </div>

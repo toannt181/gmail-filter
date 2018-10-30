@@ -27,3 +27,8 @@ code {
 pre {
   white-space: pre-wrap;
 }
+
+.img-copy {
+  fill: white;
+  margin-left: 4px;
+}

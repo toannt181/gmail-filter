@@ -99,7 +99,8 @@
     "id": 16,
     "label": "Tran Quoc Y",
     "value": "tran.quoc.y@framgia.com",
-    "aid": "2047092"
+    "aid": "2047092",
+    "disable": true
   },
   {
     "id": 17,
@@ -198,12 +199,6 @@
     "aid": "2085754"
   },
   {
-    "id": 33,
-    "label": "Le Duc Tho",
-    "value": "le.duc.tho@framgia.com",
-    "aid": "3075419"
-  },
-  {
     "id": 34,
     "label": "Nguyen Tuan Anhc",
     "value": "nguyen.tuan.anhc@framgia.com",
@@ -231,7 +226,8 @@
     "id": 38,
     "label": "Yuji Matsumoto",
     "value": "yuji.matsumoto@framgia.com",
-    "aid": "3096974"
+    "aid": "3096974",
+    "disable": true
   },
   {
     "id": 39,

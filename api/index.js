@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 const log = require('debug')('app:api')
 const { getMessage, getMessageDetail } = require('./gmailApi')
-const frontenders = require('../frontender.json')
+const frontenders = require('../frontender.json').filter(item => !item.disable)
 const find = require('lodash/find')
 const { sendMessageToChatwork } = require('../chatwork')
 
@@ -16,7 +16,7 @@ router.post('/getMails', async (req, res) => {
     if (!list) {
       throw new Error('Cant find any message')
     }
-    const array = list.map(async item => getMessageDetail(gmail, item))
+    const array = list.map(async item => getMessageDetail(gmail, item, req.body.date))
     const headerUsers = await Promise.all(array)
     const users = frontenders.map(frontender => {
       const name = frontender.label.replace(/\s+/ig, '').toUpperCase()
