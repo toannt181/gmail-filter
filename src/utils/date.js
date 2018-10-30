@@ -21,7 +21,7 @@ function getReportDate() {
 }
 
 function isLate(date, reportDate) {
-  return moment(date).diff(moment(reportDate).add(1, 'days').hour(0).minute(0).second(0), 'secound') > 0
+  return moment(date).diff(moment(reportDate).add(1, 'days').hour(0).minute(0).second(0), 'minutes') > 0
 }
 
 

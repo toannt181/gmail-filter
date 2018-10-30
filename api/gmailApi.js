@@ -40,7 +40,9 @@ function getMessageDetail(gmail, item, date) {
         res.data.payload.headers.forEach(header => {
           data[header.name] = header.value
         })
-        const checkReportBelongToday = moment(date).hours(11).minutes(45).seconds(0).diff(moment(data.Date)) < 0
+        // Report after 11 am
+        const reportDate = moment(data.Date).diff(moment(date).hours(11).minutes(0).seconds(0), 'hours', true)
+        const checkReportBelongToday = reportDate >= 0 && reportDate <= 22
         log('Mail From %s Date %s isBelong %s', data.From, data.Date, checkReportBelongToday)
         if (!checkReportBelongToday) return resolve(null)
         resolve(data)
