@@ -189,7 +189,7 @@ class Form extends React.PureComponent {
                 Message
                 <button className="button is-primary" onClick={this.copy}>
                   {isCopy ? 'Copied!' : 'Copy'}
-                  <img class="img-copy" src={copyImage} alt="copy" width="18" />
+                  <img className="img-copy" src={copyImage} alt="copy" width="18" />
                 </button>
               </div>
               <pre id="chatwork-msg">{message}</pre>

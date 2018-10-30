@@ -12,6 +12,7 @@ function getMessage(gmail, date) {
       },
       (err, res) => {
         if (err) {
+          console.error(err)
           reject(err)
           return
         }
@@ -31,6 +32,7 @@ function getMessageDetail(gmail, item, date) {
       },
       (err, res) => {
         if (err) {
+          console.error(err)
           reject(err)
           return
         }
@@ -40,7 +42,7 @@ function getMessageDetail(gmail, item, date) {
         })
         const checkReportBelongToday = moment(date).hours(11).minutes(45).seconds(0).diff(moment(data.Date)) < 0
         log('Mail From %s Date %s isBelong %s', data.From, data.Date, checkReportBelongToday)
-        if (!checkReportBelongToday) return
+        if (!checkReportBelongToday) return resolve(null)
         resolve(data)
       }
     )

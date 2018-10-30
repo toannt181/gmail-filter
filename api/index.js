@@ -17,7 +17,8 @@ router.post('/getMails', async (req, res) => {
       throw new Error('Cant find any message')
     }
     const array = list.map(async item => getMessageDetail(gmail, item, req.body.date))
-    const headerUsers = await Promise.all(array)
+    const headers = await Promise.all(array)
+    const headerUsers = headers.filter(item => item)
     const users = frontenders.map(frontender => {
       const name = frontender.label.replace(/\s+/ig, '').toUpperCase()
       const mail = find(headerUsers, item => {
