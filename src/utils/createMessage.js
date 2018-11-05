@@ -1,7 +1,7 @@
 const find = require('lodash/find')
 const { isLate } = require('./date')
 
-function getListUserReported(users, reportDate, absences) {
+function getListUserReported(users, reportDate, absences, cheatUsers) {
   const ontime = []
   const late = []
   const miss = []
@@ -18,7 +18,7 @@ function getListUserReported(users, reportDate, absences) {
       miss.push(user)
       return
     }
-    if (isLate(date, reportDate)) {
+    if (isLate(date, reportDate) && cheatUsers.indexOf(users.name) === -1) {
       late.push(user)
     } else {
       ontime.push(user)
@@ -27,9 +27,9 @@ function getListUserReported(users, reportDate, absences) {
   return { ontime, late, miss, absent }
 }
 
-function createMessageText(reportGroup, reportDate, absences) {
+function createMessageText(reportGroup, reportDate, absences, cheatUsers) {
   const time = reportDate.format('DD MMM YYYY')
-  const { late, ontime, miss, absent } = getListUserReported(reportGroup, reportDate, absences)
+  const { late, ontime, miss, absent } = getListUserReported(reportGroup, reportDate, absences, cheatUsers)
   const total = late.length + ontime.length + miss.length
   const point = ontime.length - miss.length * 2 - late.length
   const message = `[info][title]Daily Report ${time}[/title]Total: ${total} Point: ${point}

@@ -214,7 +214,8 @@
     "id": 36,
     "label": "Hoang Tuan Anh",
     "value": "hoang.tuan.anh@framgia.com",
-    "aid": "3153487"
+    "aid": "3153487",
+    "disable": true
   },
   {
     "id": 37,

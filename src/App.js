@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:4000/api'
+
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000/api' : '/api'
 
 class App extends Component {
   render() {

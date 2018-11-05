@@ -20,6 +20,7 @@ class Form extends React.PureComponent {
     error: '',
     isSendMessage: false,
     isCopy: false,
+    cheatUsers: [],
   }
 
   componentDidMount() {
@@ -67,7 +68,7 @@ class Form extends React.PureComponent {
     if (!mail.date) {
       return mail.absent ? <span className="tag is-default">Absent</span> : <span className="tag is-warning">Miss</span>
     }
-    if (isLate(mail.date, this.state.selectedDay)) {
+    if (isLate(mail.date, this.state.selectedDay) && !this.isCheatUser(mail.name)) {
       return <span className="tag is-danger">Late</span>
     } else {
       return <span className="tag is-success">On time</span>
@@ -89,6 +90,7 @@ class Form extends React.PureComponent {
             <th className="mail-table-name">From</th>
             <th className="mail-table-date">Mail Title</th>
             <th className="mail-table-date">Date</th>
+            <th className="mail-table-tool">Tool</th>
           </tr>
         </thead>
         <tbody>
@@ -101,6 +103,9 @@ class Form extends React.PureComponent {
                 {mail.date ? moment(mail.date).format('DD/MM/YYYY HH:mm') : 'N/A'} &nbsp;&nbsp;
                 {this.renderStatus(mail)}
               </td>
+              <td className="text-center">
+                <input type="checkbox" value={this.isCheatUser(mail.name)} onChange={() => this.toggleCheat(mail.name)} />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -109,9 +114,9 @@ class Form extends React.PureComponent {
   }
 
   createChatworkMessage = () => {
-    const { mails, selectedDay, selectedOption } = this.state
+    const { mails, selectedDay, selectedOption, cheatUsers } = this.state
     if (!mails) return
-    this.setState({ message: createMessage(mails, selectedDay, selectedOption) })
+    this.setState({ message: createMessage(mails, selectedDay, selectedOption, cheatUsers) })
   }
 
   handleDayChange = (date) => {
@@ -129,7 +134,7 @@ class Form extends React.PureComponent {
     this.setState({ options })
   }
 
-  copy= () => {
+  copy = () => {
     if (document.selection) {
       var range = document.body.createTextRange()
       range.moveToElementText(document.getElementById('chatwork-msg'))
@@ -141,6 +146,21 @@ class Form extends React.PureComponent {
     }
     document.execCommand('copy')
     this.setState({ isCopy: true })
+  }
+
+  isCheatUser = (name) => {
+    return this.state.cheatUsers.indexOf(name) !== -1
+  }
+
+  toggleCheat = (name) => {
+    const { cheatUsers } = this.state
+    const index = cheatUsers.indexOf(name)
+    if (index === -1) {
+      this.setState({ cheatUsers: [...cheatUsers, name] }, this.createChatworkMessage)
+    } else {
+      cheatUsers.splice(index, 1)
+      this.setState({ cheatUsers: [...cheatUsers] }, this.createChatworkMessage)
+    }
   }
 
   render() {

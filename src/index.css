@@ -32,3 +32,11 @@ pre {
   fill: white;
   margin-left: 4px;
 }
+
+.mail-table-tool {
+  width: 5%;
+}
+
+.text-center {
+  text-align: center;
+}

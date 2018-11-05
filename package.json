@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build",
-    "server": "DEBUG=app:* nodemon ./server.js",
+    "server": "DEBUG=app:* nodemon ./server.js --",
     "eject": "react-scripts eject",
-    "start": "npm run build && npm run server",
+    "start": "npm run build && DEBUG=app:* nodemon ./server.js",
     "auth": "node startAuth"
   },
   "eslintConfig": {
@@ -28,6 +28,7 @@
     "body-parser": "^1.18.3",
     "bulma": "^0.7.2",
     "cors": "^2.8.4",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "googleapis": "^27.0.0",
